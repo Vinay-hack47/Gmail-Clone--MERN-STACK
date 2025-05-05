@@ -31,7 +31,7 @@ const ScheduledMail = () => {
 
 
   const deleteEmail = async (id) => {
-    await axios.delete(`http://localhost:8000/api/v1/email/delete/${id}`, {
+    await axios.delete(`https://schedule-mail-app-gmail-clone.onrender.com/api/v1/email/delete/${id}`, {
       withCredentials: true,
     });
   };
