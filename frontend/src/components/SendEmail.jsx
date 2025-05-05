@@ -5,6 +5,8 @@ import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 
 const SendEmail = () => {
@@ -25,7 +27,7 @@ const SendEmail = () => {
 
   const [attachments, setAttachments] = useState([]);
   const [previews, setPreviews] = useState([]);
-  console.log(previews);
+  const [deliveryDate, setDeliveryDate] = useState(new Date());
 
   const changeHandler = (e) => {
     setEmailData({ ...emailData, [e.target.name]: e.target.value });
@@ -60,7 +62,8 @@ const SendEmail = () => {
     formData.append('message', emailData.message);
     for (let i = 0; i < attachments.length; i++) {
       formData.append('attachments', attachments[i]);
-    }
+    };
+    formData.append('deliveryDate', deliveryDate);
 
     try {
       const res = await axios.post("http://localhost:8000/api/v1/email/create", formData, {
@@ -75,7 +78,6 @@ const SendEmail = () => {
       if (res.data.success) {
         toast.success(res.data.msg)
       }
-      console.log(res.data)
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.msg);
@@ -86,7 +88,6 @@ const SendEmail = () => {
   };
 
 
-
   return (
     <div className={` ${open ? "block" : "hidden"} fixed bottom-0 right-0 w-96 bg-white shadow-xl shadow-slate-600 rounded-t-md`}>
       <div className='flex items-center justify-between px-3 py-2 bg-[$F2F6FC]'>
@@ -95,7 +96,7 @@ const SendEmail = () => {
           <RxCross2 size={"20px"}></RxCross2>
         </div>
       </div>
-
+      
       <form onSubmit={sumbitHandler} className='flex flex-col p-3 gap-2'>
         <input onChange={changeHandler} type="text" placeholder='To' name="to" value={emailData.to} className='outline-none py-1' />
         <input onChange={changeHandler} type="text" placeholder='Subject' name="subject" value={emailData.subject} className='outline-none py-1' />
@@ -119,6 +120,7 @@ const SendEmail = () => {
             </div>
           ))}
         </div>
+        <DatePicker selected={deliveryDate} onChange={(date) => setDeliveryDate(date)} />
 
 
         <button type="submit" onClick={() => dispatch(setOpen(false))} className="bg-blue-700 rounded-full p-2 hover: cursor-pointer">Send</button>

@@ -17,21 +17,54 @@ const __dirname = dirname(__filename);
 export const createEmail = async (req,res) =>{
   try {
     const userId = req.id;
-    const {to, subject, message} = req.body;
-    if(!to || !subject || !message) return res.status(400).json({msg:"All fields are required"});
+    const {to, subject, message, deliveryDate} = req.body;
+    if(!to || !subject || !message || !deliveryDate) return res.status(400).json({msg:"All fields are required"});
+
+    //Validate delivery date (max 1 year from now)
+    const maxDate = new Date();
+    maxDate.setFullYear(maxDate.getFullYear() + 1);
+    const deliveryDateObj = new Date(deliveryDate);
+
+    if (deliveryDateObj > maxDate) {
+      return res.status(400).json({ msg: "Delivery date cannot exceed 1 year from now" });
+    }
+
+    // Prepare attachments
+    const attachments = req.files.map(file => ({
+     filename: file.originalname,
+     path: path.join(__dirname, '..', 'uploads', file.filename),
+   }));
+
+    // If the delivery date is in the future, save the email for scheduling
+    if (deliveryDateObj > new Date()) {
+      const newEmail = await Email.create({
+        to,
+        subject,
+        message,
+        userId,
+        deliveryDate: deliveryDateObj,
+        delivered: false,
+      });
+
+      // Clean up uploaded files
+      req.files.forEach((file) => {
+        fs.unlinkSync(file.path);
+      });
+
+      return res.status(200).json({ msg: "Email scheduled successfully", success: true, newEmail });
+    }
+
+
 
     const newEmail = await Email.create({
       to,
       subject,
       message,
-      userId
+      userId,
+      deliveryDate,
+      delivered:false,
     });
 
-     // Prepare attachments
-     const attachments = req.files.map(file => ({
-      filename: file.originalname,
-      path: path.join(__dirname, '..', 'uploads', file.filename),
-    }));
 
      // Send email using Nodemailer
     const emailRes =  await sendEmail(to, subject, message, attachments);
@@ -41,7 +74,7 @@ export const createEmail = async (req,res) =>{
       fs.unlinkSync(file.path);
     });
 
-    return res.status(200).json({msg: "Email created and sent successfully", success: true, newEmail})
+    return res.status(200).json({msg: "Email created and sent successfully", success: true, newEmail , emailRes})
 
   } catch (error) {
     console.log(error);
@@ -53,7 +86,6 @@ export const createEmail = async (req,res) =>{
 export const deleteEmail = async(req, res) => {
   try {
     const emailId = req.params.id;
-    console.log("Deleting Email ID:", emailId); // ✅ Debugging
     
     if(!emailId) return res.status(400).json({msg:"Email id is required"});
 
@@ -89,3 +121,37 @@ export const getAllEmailById = async (req, res) =>{
   }
 
 }
+
+export const getScheduledEmails = async(req,res) =>{
+  try {
+    const userId = req.id;
+    const emails = await Email.find({userId , delivered:false});
+
+    return res.status(200).json({msg: "All scheduled emails", success:true, emails});
+    
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({ msg: "Internal Server Error", success:false});
+  }
+}
+
+
+export const updateScheduledEmail = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { to, subject, message, deliveryDate } = req.body;
+
+    const email = await Email.findByIdAndUpdate(
+      id,
+      { to, subject, message, deliveryDate },
+      { new: true }
+    );
+
+    if (!email) return res.status(404).json({ msg: "Email not found" });
+
+    return res.status(200).json({ success: true, email });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ msg: "Internal Server Error" });
+  }
+};

@@ -5,11 +5,10 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import userRoutes from "./routes/user.route.js"
 import emailRoutes from "./routes/email.route.js"
-
+import './scheduler.js'; // Import the scheduler
 
 dotenv.config();
 connectDB();
-
 
 
 const PORT = 8000;

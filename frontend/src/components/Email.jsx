@@ -11,10 +11,8 @@ import { format, isToday, isYesterday, isThisYear } from "date-fns";
 const Email = ({email}) => { 
   const navigate = useNavigate();
   // const {selectedEmail} = useSelector((store => store.app));
-  // console.log(selectedEmail);
   
   const dispatch = useDispatch();
-  // console.log(email);
 
   const handleEmailClick = () =>{
     dispatch(setSelectedEmail(email))

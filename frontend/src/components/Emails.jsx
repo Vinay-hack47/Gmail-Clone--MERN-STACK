@@ -70,9 +70,7 @@ const Emails = () => {
 
     const search = searchText?.toLowerCase().trim() || ""; // Trim for cleaner search
 
-    // console.log("Filtering Emails..."); // Debugging step
-    // console.log("Emails:", emails);
-    // console.log("Searched Text:", searchText);
+    
 
     const filteredEmails = emails.filter((email) => {
       const subject = email.subject?.toLowerCase() || "";

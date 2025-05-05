@@ -8,7 +8,6 @@ const useGetAllEmails = () => {
   const dispatch = useDispatch();
   const {emails} = useSelector(store => store.app);
 
-  // console.log(emails);
   
   useEffect(() =>{
     const fetchEmails = async () =>{

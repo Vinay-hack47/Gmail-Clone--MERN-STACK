@@ -18,7 +18,6 @@ const Mail = () => {
 
   const navigate = useNavigate();
 
-  console.log(id);
 
   const { selectedEmail} = useSelector(store => store.app);
 
@@ -42,7 +41,6 @@ const Mail = () => {
       const res = await axios.delete(`http://localhost:8000/api/v1/email/delete/${id}`,{
         withCredentials:true
       });
-      console.log(res);
       
 
       if(res.data.success){

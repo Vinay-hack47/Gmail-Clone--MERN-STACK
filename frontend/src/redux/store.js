@@ -22,8 +22,6 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, appSlice);
 
 
-
-
 const store = configureStore({
   reducer: {
     app: persistedReducer,

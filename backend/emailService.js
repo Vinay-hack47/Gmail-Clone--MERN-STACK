@@ -3,9 +3,6 @@ import dotenv from "dotenv"
 
 dotenv.config();
 
-console.log('USER:', process.env.USER); // Debugging
-console.log('APP_PASSWORD:', process.env.APP_PASSWORD); // Debugging
-
 
 const transporter = nodemailer.createTransport({
   // service: 'gmail', // You can use any email service
@@ -21,7 +18,7 @@ const transporter = nodemailer.createTransport({
 export const sendEmail = async (to, subject, message, attachments = []) => {
 
   // const user = req.id;
-  // console.log(user);
+ 
   
 
   const mailOptions = {
@@ -35,7 +32,7 @@ export const sendEmail = async (to, subject, message, attachments = []) => {
   try {
     await transporter.sendMail(mailOptions);
     // res.json({msg: "Email sent successfully to"})
-    console.log("Email sent successfully");
+    // console.log("Email sent successfully");
     
   } catch (error) {
     console.error('Error sending email:', error);

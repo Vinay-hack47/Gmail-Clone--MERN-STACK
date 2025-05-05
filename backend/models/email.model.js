@@ -18,6 +18,14 @@ const emailSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
+    deliveryDate: {
+      type: Date,
+      require:true
+    },
+    delivered:{
+      type:Boolean,
+      default:false
+    },
   },
   { timestamps: true }
 );

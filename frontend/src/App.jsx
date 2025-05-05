@@ -10,6 +10,8 @@ import SendEmail from "./components/SendEmail"
 import Login from "./components/Login"
 import SignUp from "./components/SignUp"
 import { Toaster } from 'react-hot-toast'
+import ScheduledEmailss from "./components/ScheduledEmailss"
+import ScheduledMail from "./components/ScheduledMail"
 
 const appRouter = createBrowserRouter([
   {
@@ -24,6 +26,14 @@ const appRouter = createBrowserRouter([
         path: '/mail/:id',
         element: <Mail />,
       },
+      {
+        path: '/scheduled-email',
+        element: <ScheduledEmailss />
+      },
+      {
+        path: "/scheduled-email/:id",
+        element: <ScheduledMail />
+      }
     ]
   },
   {
@@ -60,7 +70,6 @@ function App() {
               <Outlet />
             </div>
           </div>
-         
         </div>
       </RouterProvider>
       <Toaster />
