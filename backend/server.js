@@ -6,6 +6,7 @@ import cors from "cors";
 import userRoutes from "./routes/user.route.js"
 import emailRoutes from "./routes/email.route.js"
 import './scheduler.js'; // Import the scheduler
+import path from "path"
 
 dotenv.config();
 connectDB();
@@ -13,6 +14,8 @@ connectDB();
 
 const PORT = 8000;
 const app = express();
+
+const _dirname = path.resolve();
 
 //middleware
 app.use(express.urlencoded({extended:true}));
@@ -29,15 +32,11 @@ app.use(cors(corsOptions));
 app.use("/api/v1/user", userRoutes)
 app.use("/api/v1/email", emailRoutes);
 
-app.get("/" ,(req,res) =>{
-  res.send("Hello World");
-})
 
-// Error handling middleware
-// app.use((err, req, res, next) => {
-//   console.error(err.stack);
-//   res.status(500).send("Something broke!");
-// });
+app.use(express.static(path.join(_dirname, "/frontend/dist")));
+app.get("*", (_,res) =>{
+  res.sendFile(path.resolver(_dirname, "frontend", "dist", "index.html"));
+})
 
 app.listen(PORT, () =>{
   console.log(`Server is running on port ${PORT}`);
