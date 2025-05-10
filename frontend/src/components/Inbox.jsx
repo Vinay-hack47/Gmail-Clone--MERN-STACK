@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import { FaCaretDown, FaUserFriends } from 'react-icons/fa'
 import { IoMdMore, IoMdRefresh } from 'react-icons/io'
 import { GoTag } from "react-icons/go";
 import { MdCropSquare, MdInbox, MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
 import Emails from './Emails';
+import useGetAllEmails from '../hooks/useGetAllEmails';
+
 
 const mailType = [
   {
@@ -21,6 +23,8 @@ const mailType = [
 ]
 
 const Inbox = () => {
+  useGetAllEmails();
+  
 
   const [selected, setSelected] = useState(0);
   return (
@@ -51,10 +55,12 @@ const Inbox = () => {
             {
               mailType.map((item , index) =>{
                 return (
+                  <>
                   <button onClick={() => setSelected(index)} className={` ${selected === index ? "border-b-4 border-b-blue-600 text-blue-600" : "border-b-4 border-b-transparent text-blue-600"}flex items-center gap-5 p-4 w-52 hover:bg-gray-200`}>
                       {item.icon}
                       <span>{item.text}</span>
                   </button>
+                  </>
                 )
               })
             }

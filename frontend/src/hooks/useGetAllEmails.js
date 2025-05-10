@@ -1,14 +1,12 @@
-import axios from 'axios';
-import React, {useEffect} from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { setEmails } from '../redux/appSlice';
+import axios from "axios";
+import  { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setEmails } from "../redux/appSlice";
 
 const useGetAllEmails = () => {
-
   const dispatch = useDispatch();
-  const {emails} = useSelector(store => store.app);
+  const { emails } = useSelector((store) => store.app);
 
-  
   useEffect(() =>{
     const fetchEmails = async () =>{
       try{
@@ -22,7 +20,8 @@ const useGetAllEmails = () => {
       }
     }
     fetchEmails();
-  }, []);
-}
+  }, [emails, dispatch]);
 
-export default useGetAllEmails
+};
+
+export default useGetAllEmails;

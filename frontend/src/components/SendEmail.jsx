@@ -11,6 +11,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 const SendEmail = () => {
 
+  
+
   const navigate = useNavigate();
 
   const { open } = useSelector(store => store.app);
@@ -72,11 +74,9 @@ const SendEmail = () => {
         },
         withCredentials: true
       });
-
-
       dispatch(setEmails(res.data.email))
       if (res.data.success) {
-        toast.success(res.data.msg)
+        toast.success(res.data.msg);
       }
     } catch (error) {
       console.log(error);

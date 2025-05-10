@@ -1,12 +1,9 @@
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom"
-import { useState } from 'react'
 import './App.css'
-import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar'
 import Inbox from './components/Inbox'
 import Mail from "./components/Mail"
 import Body from './components/Body'
-import SendEmail from "./components/SendEmail"
 import Login from "./components/Login"
 import SignUp from "./components/SignUp"
 import { Toaster } from 'react-hot-toast'
