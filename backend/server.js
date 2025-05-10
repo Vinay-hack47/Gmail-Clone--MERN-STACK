@@ -29,7 +29,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 //routes
-app.use("/api/v1/user", userRoutes)
+app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/email", emailRoutes);
 
 

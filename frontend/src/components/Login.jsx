@@ -23,7 +23,8 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post("https://schedule-mail-app-gmail-clone.onrender.com/api/v1/user/login", userData, {
+      // const res = await axios.post("https://schedule-mail-app-gmail-clone.onrender.com/api/v1/user/login", userData, {
+      const res = await axios.post("http://localhost:8000/api/v1/user/login", userData, {
         headers: {
           "Content-Type": "application/json"
         },
@@ -38,7 +39,7 @@ const Login = () => {
     }
     catch (error) {
       console.log(error);
-      toast.success(error.response.data.msg)
+      toast.success(error?.response?.data?.msg)
     }
   }
 

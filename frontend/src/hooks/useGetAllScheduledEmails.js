@@ -11,7 +11,7 @@ const useGetAllScheduledEmails = () => {
     const getAllScheduledEmails = async () => {
       try {
         const res = await axios.get(
-          "https://schedule-mail-app-gmail-clone.onrender.com/api/v1/email/scheduled",
+          "http://localhost:8000/api/v1/email/scheduled",
           {
             withCredentials: true,
           }
