@@ -7,7 +7,7 @@ The **Gmail Clone** is a full-stack MERN (MongoDB, Express.js, React.js, Node.js
 
 ## 🌐 Live Demo
 Check out the live version of the Gmail Clone:  
-[https://schedule-mail-app-gmail-clone.onrender.com](https://schedule-mail-app-gmail-clone.onrender.com)
+[https://scheduled-mail-app-gmail-clone.onrender.com](https://scheduled-mail-app-gmail-clone.onrender.com)
 
 ---
 
