@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import  {  useState } from 'react'
 import axios from "axios";
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
@@ -24,7 +24,7 @@ const SignUp = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://localhost:8000/api/v1/user/register", userData, {
+      const res = await axios.post("https://scheduled-mail-app-gmail-clone.onrender.com/api/v1/user/register", userData, {
         headers: {
           "Content-Type": "application/json"
         },

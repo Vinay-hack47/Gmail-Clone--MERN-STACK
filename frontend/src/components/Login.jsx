@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import toast from 'react-hot-toast'
 import { useDispatch  } from 'react-redux'
 import {setAuthUser} from "../redux/appSlice";
@@ -24,7 +24,7 @@ const Login = () => {
 
     try {
       // const res = await axios.post("https://schedule-mail-app-gmail-clone.onrender.com/api/v1/user/login", userData, {
-      const res = await axios.post("http://localhost:8000/api/v1/user/login", userData, {
+      const res = await axios.post("https://scheduled-mail-app-gmail-clone.onrender.com/api/v1/user/login", userData, {
         headers: {
           "Content-Type": "application/json"
         },

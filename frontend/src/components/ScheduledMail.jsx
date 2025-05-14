@@ -1,5 +1,4 @@
 import axios from 'axios';
-import React from 'react'
 import { BiArchiveIn } from 'react-icons/bi';
 import { FaArrowLeft } from 'react-icons/fa';
 import { IoMdMore } from 'react-icons/io';
@@ -31,7 +30,7 @@ const ScheduledMail = () => {
 
 
   const deleteEmail = async (id) => {
-    await axios.delete(`http://localhost:8000/api/v1/email/delete/${id}`, {
+    await axios.delete(`https://scheduled-mail-app-gmail-clone.onrender.com/api/v1/email/delete/${id}`, {
       withCredentials: true,
     });
   };

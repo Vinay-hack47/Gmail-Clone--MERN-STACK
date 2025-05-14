@@ -1,8 +1,7 @@
-import React from 'react'
 import { FaArrowLeft } from "react-icons/fa6";
 import { useParams } from "react-router-dom"
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { MdDeleteOutline, MdKeyboardArrowLeft, MdKeyboardArrowRight, MdOutlineDriveFileMove, MdOutlineMarkEmailUnread, MdOutlineReport, MdOutlineWatchLater } from 'react-icons/md';
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight, MdOutlineDriveFileMove, MdOutlineMarkEmailUnread, MdOutlineReport,  } from 'react-icons/md';
 import { BiArchiveIn } from "react-icons/bi";
 import { IoMdMore } from 'react-icons/io';
 import { useSelector } from 'react-redux';
@@ -38,7 +37,7 @@ const Mail = () => {
   const deleteEmail = async() =>{
 
     try {
-      const res = await axios.delete(`http://localhost:8000/api/v1/email/delete/${id}`,{
+      const res = await axios.delete(`https://scheduled-mail-app-gmail-clone.onrender.com/api/v1/email/delete/${id}`,{
         withCredentials:true
       });
       

@@ -16,14 +16,14 @@ import { useNavigate } from "react-router-dom";
 const Navbar = () => {
 
   const [text, setText] = useState("");
-  const { user, open } = useSelector(store => store.app);
+  const { user } = useSelector(store => store.app);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // console.log(text);
 
   const logoutHandler = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/v1/user/logout", {
+      const res = await axios.get("https://scheduled-mail-app-gmail-clone.onrender.com/api/v1/user/logout", {
         withCredentials: true,
       });
 
